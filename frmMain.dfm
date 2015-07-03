@@ -30,9 +30,7 @@ object MainForm: TMainForm
     Width = 407
     Height = 13
     AutoSize = False
-    Caption = 
-      'Ikona ze strza'#322'k'#261' w prawo symbolizuje folder lub plik, kt'#243'rego n' +
-      'azwa ulegnie zmianie.'
+    Caption = 'An icon with right arrow marks file or folder, which name will be changed'
     WordWrap = True
   end
   object lblCopyright: TLabel
@@ -41,9 +39,7 @@ object MainForm: TMainForm
     Width = 379
     Height = 13
     Anchors = [akLeft, akBottom]
-    Caption = 
-      'Copyright '#169' 2006-2008 by Tomasz Trejderowski. Wszelkie prawa zas' +
-      'trze'#380'one!'
+    Caption = 'Copyright '#169' 2006-2008 by Tomasz Trejderowski.'
   end
   object lblWeb: TLabel
     Left = 611
@@ -53,7 +49,7 @@ object MainForm: TMainForm
     Cursor = crHandPoint
     Alignment = taRightJustify
     Anchors = [akLeft, akRight, akBottom]
-    Caption = 'http://www.trejderowski.pl/'
+    Caption = 'http://www.gaman.pl/'
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clBackground
     Font.Height = -11
@@ -69,7 +65,7 @@ object MainForm: TMainForm
     Top = 32
     Width = 241
     Height = 161
-    Caption = ' Nazwy plik'#243'w - zmiany og'#243'lne '
+    Caption = ' General changes '
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clBackground
     Font.Height = -11
@@ -82,7 +78,7 @@ object MainForm: TMainForm
       Top = 20
       Width = 31
       Height = 13
-      Caption = 'Litery:'
+      Caption = 'Letters:'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -95,7 +91,7 @@ object MainForm: TMainForm
       Top = 96
       Width = 129
       Height = 13
-      Caption = 'Odst'#281'py mi'#281'dzy wyrazami:'
+      Caption = 'Words separation:'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -108,7 +104,7 @@ object MainForm: TMainForm
       Top = 141
       Width = 199
       Height = 13
-      Caption = 'Ci'#261'g separatora u'#380'ywany podczas zmian:'
+      Caption = 'Separator used to separate words'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -121,7 +117,7 @@ object MainForm: TMainForm
       Top = 40
       Width = 211
       Height = 17
-      Caption = 'Polskie znaki na odpowiedaj'#261'ce im litery'
+      Caption = 'Change Polish characters into relevant Latin letters'
       Checked = True
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
@@ -138,7 +134,7 @@ object MainForm: TMainForm
       Top = 56
       Width = 170
       Height = 17
-      Caption = 'Usuwaj znaki przestankowe (.,'#39')'
+      Caption = 'Remove dots, commas etc.'
       Checked = True
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
@@ -166,13 +162,13 @@ object MainForm: TMainForm
       TabOrder = 0
       OnChange = ParameterClick
       Items.Strings = (
-        '[bez zmian]'
-        'wszystkie ma'#322'e'
-        'WSZYSTKIE DU'#379'E'
-        'Pierwsza litera du'#380'a - reszta ma'#322'e'
-        'Pierwsza litera du'#380'a - reszta bez zmian'
-        'Pierwsza Litera W S'#322'owie Du'#380'a'
-        'Styl angielski (np. Jack in the Box)')
+        '[no change]'
+        'all lowercase'
+        'ALL UPPERCASE'
+        'First letter UPPERCASE - rest lowercase'
+        'irst letter UPPERCASE - rest unchanged'
+        'First Letter In Each Word Uppercase'
+        'English Title (i.e. Jack in the Box)')
     end
     object cbWordSpace: TComboBox
       Left = 8
