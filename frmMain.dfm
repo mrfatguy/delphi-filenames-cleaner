@@ -186,13 +186,13 @@ object MainForm: TMainForm
       TabOrder = 4
       OnChange = ParameterClick
       Items.Strings = (
-        'Usuwaj odst'#281'py mi'#281'dzy wyrazami'
-        'Usuwaj odst'#281'py i zmieniaj na du'#380'e litery'
-        'Nie usuwaj odst'#281'p'#243'w'
-        'Zamieniaj na ci'#261'g separatora'
-        'Tw'#243'rz odst'#281'py przed du'#380'ymi literami (bez cyfr)'
-        'Tw'#243'rz odst'#281'py przed du'#380'ymi literami'
-        'Tw'#243'rz odst'#281'py zamiast ci'#261'gu separatora')
+        'Remove spaces between words'
+        'Remove spaces and change first letters to uppercase (to CamelCaseNotation)'
+        'Do not remove spaces'
+        'Replace all spaces with separator string'
+        'Add spaces before uppercase letters, but not before numbers'
+        'Add spaces before uppercase letters and numbers'
+        'Replace all occurrences of separator string with space')
     end
     object eSeparator: TEdit
       Left = 216
@@ -214,7 +214,7 @@ object MainForm: TMainForm
       Top = 72
       Width = 161
       Height = 17
-      Caption = 'Usuwaj niepotrzebne odst'#281'py'
+      Caption = 'Remove unnecessary spaces'
       Checked = True
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
@@ -249,7 +249,7 @@ object MainForm: TMainForm
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
-    Caption = 'Zamknij'
+    Caption = 'Close'
     TabOrder = 9
     OnClick = btnExitClick
   end
@@ -262,15 +262,15 @@ object MainForm: TMainForm
     Checkboxes = True
     Columns = <
       item
-        Caption = 'Obecna nazwa'
+        Caption = 'Current name'
         Width = 207
       end
       item
-        Caption = 'Nazwa po zmianie'
+        Caption = 'Name after change'
         Width = 207
       end
       item
-        Caption = 'Rozmiar pliku'
+        Caption = 'Filesize'
         Width = 77
       end>
     ColumnClick = False
@@ -291,7 +291,7 @@ object MainForm: TMainForm
     Width = 184
     Height = 16
     Alignment = taLeftJustify
-    Caption = ' Liczba zmienianych folder'#243'w i plik'#243'w'
+    Caption = ' Number of files and folders to be changed '
     ParentShowHint = False
     ShowHint = False
     TabOrder = 2
@@ -319,7 +319,7 @@ object MainForm: TMainForm
     Width = 241
     Height = 86
     Anchors = [akLeft, akBottom]
-    Caption = ' Lista plik'#243'w '
+    Caption = ' File list '
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clBackground
     Font.Height = -11
@@ -332,7 +332,7 @@ object MainForm: TMainForm
       Top = 16
       Width = 232
       Height = 17
-      Caption = 'Wy'#347'wietlaj podfoldery w wybranym folderze'
+      Caption = 'Show subfolders in selected folder'
       Checked = True
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
@@ -349,7 +349,7 @@ object MainForm: TMainForm
       Top = 32
       Width = 232
       Height = 17
-      Caption = 'Poka'#380' tylko elementy, kt'#243're b'#281'd'#261' zmieniane'
+      Caption = 'Show only those items, that will be changed'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -364,7 +364,7 @@ object MainForm: TMainForm
       Top = 48
       Width = 221
       Height = 17
-      Caption = 'Zaznaczaj elementy, kt'#243're b'#281'd'#261' zmieniane'
+      Caption = 'Check items, that will be changed'
       Checked = True
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
@@ -381,7 +381,7 @@ object MainForm: TMainForm
       Top = 64
       Width = 228
       Height = 17
-      Caption = 'Zawsze przeno'#347' zaznaczenie na list'#281' plik'#243'w'
+      Caption = 'Always keep selection, even after refreshing the list'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -397,7 +397,7 @@ object MainForm: TMainForm
     Width = 42
     Height = 16
     Alignment = taLeftJustify
-    Caption = ' '#346'cie'#380'ka'
+    Caption = ' Path'
     ParentShowHint = False
     ShowHint = False
     TabOrder = 10
@@ -439,7 +439,7 @@ object MainForm: TMainForm
     Width = 241
     Height = 54
     Anchors = [akLeft, akBottom]
-    Caption = ' Wygl'#261'd i dzia'#322'anie programu '
+    Caption = ' Program settings '
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clBackground
     Font.Height = -11
@@ -456,7 +456,7 @@ object MainForm: TMainForm
       Width = 221
       Height = 17
       Anchors = [akTop, akRight]
-      Caption = 'Operacje usu'#324' i uruchom po potwierdzeniu'
+      Caption = 'File deletion or execution requires confirmation'
       Checked = True
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
@@ -475,7 +475,7 @@ object MainForm: TMainForm
       Top = 32
       Width = 229
       Height = 17
-      Caption = 'Pokazuj '#347'cie'#380'k'#281' na pasku tytu'#322'owym i zada'#324
+      Caption = 'Display path in program title'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -491,7 +491,7 @@ object MainForm: TMainForm
     Top = 200
     Width = 241
     Height = 134
-    Caption = ' Nazwy plik'#243'w - zmiany szczeg'#243#322'owe '
+    Caption = ' File names -- details of change '
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clBackground
     Font.Height = -11
@@ -504,7 +504,7 @@ object MainForm: TMainForm
       Top = 20
       Width = 38
       Height = 13
-      Caption = 'na ci'#261'g:'
+      Caption = 'to:'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -517,7 +517,7 @@ object MainForm: TMainForm
       Top = 44
       Width = 38
       Height = 13
-      Caption = 'na ci'#261'g:'
+      Caption = 'to:'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -530,7 +530,7 @@ object MainForm: TMainForm
       Top = 68
       Width = 38
       Height = 13
-      Caption = 'na ci'#261'g:'
+      Caption = 'to:'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -543,7 +543,7 @@ object MainForm: TMainForm
       Top = 66
       Width = 128
       Height = 17
-      Caption = 'Zamieniaj ci'#261'g znak'#243'w:'
+      Caption = 'Change string:'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -558,7 +558,7 @@ object MainForm: TMainForm
       Top = 42
       Width = 128
       Height = 17
-      Caption = 'Zamieniaj ci'#261'g znak'#243'w:'
+      Caption = 'Change string:'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -573,7 +573,7 @@ object MainForm: TMainForm
       Top = 18
       Width = 128
       Height = 17
-      Caption = 'Zamieniaj ci'#261'g znak'#243'w:'
+      Caption = 'Change string:'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -678,7 +678,7 @@ object MainForm: TMainForm
       Top = 96
       Width = 137
       Height = 17
-      Caption = 'Uwzgl'#281'dniaj wielko'#347#263' liter'
+      Caption = 'Respect case sensitivity'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -693,7 +693,7 @@ object MainForm: TMainForm
       Top = 112
       Width = 201
       Height = 17
-      Caption = 'Uwzgl'#281'dniaj tak'#380'e rozszerzenie plik'#243'w'
+      Caption = 'Include file extension in change process'
       Font.Charset = EASTEUROPE_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -710,8 +710,7 @@ object MainForm: TMainForm
     Width = 425
     Height = 17
     Caption = 
-      'Zablokuj aktualne ustawienie zaznacze'#324' na powy'#380'szej li'#347'cie, podc' +
-      'zas jej od'#347'wie'#380'ania'
+      'Do not change current selection during list refresh'
     TabOrder = 1
   end
   object ilImages: TImageList
@@ -1258,52 +1257,52 @@ object MainForm: TMainForm
     Left = 72
     Top = 8
     object mnuExecuteSelected: TMenuItem
-      Caption = 'Uruchom zaznaczony plik'
+      Caption = 'Execute file'
       OnClick = mnuExecuteSelectedClick
     end
     object mnuSelectFolder: TMenuItem
-      Caption = 'Wybierz folder...'
+      Caption = 'Select folder...'
       OnClick = mnuSelectFolderClick
     end
     object N3: TMenuItem
       Caption = '-'
     end
     object mnuSelectAll: TMenuItem
-      Caption = 'Zaznacz wszystkie pozycje'
+      Caption = 'Select all items'
       OnClick = mnuSelectAllClick
     end
     object mnuDeselectAll: TMenuItem
-      Caption = 'Odznacz wszystkie pozycje'
+      Caption = 'Deselect all items'
       OnClick = mnuDeselectAllClick
     end
     object mnuChangeSelection: TMenuItem
-      Caption = 'Odwr'#243#263' zaznaczenie'
+      Caption = 'Revert selection'
       OnClick = mnuChangeSelectionClick
     end
     object N1: TMenuItem
       Caption = '-'
     end
     object mnuRefreshList: TMenuItem
-      Caption = 'Od'#347'wie'#380' list'#281
+      Caption = 'Refresh list'
       OnClick = mnuRefreshListClick
     end
     object N2: TMenuItem
       Caption = '-'
     end
     object mnuOpenActual: TMenuItem
-      Caption = 'Otw'#243'rz aktualny folder'
+      Caption = 'Open current folder'
       OnClick = mnuOpenActualClick
     end
     object mnuExploreActual: TMenuItem
-      Caption = 'Eksploruj aktualny folder'
+      Caption = 'Explore current folder'
       OnClick = mnuExploreActualClick
     end
     object mnuOpenSelected: TMenuItem
-      Caption = 'Otw'#243'rz zaznaczony folder'
+      Caption = 'Open selected folder'
       OnClick = mnuOpenSelectedClick
     end
     object mnuExploreSelected: TMenuItem
-      Caption = 'Eksploruj zaznaczony folder'
+      Caption = 'Explore selected folder'
       OnClick = mnuExploreSelectedClick
     end
     object N4: TMenuItem
@@ -1311,7 +1310,7 @@ object MainForm: TMainForm
     end
   end
   object fdFolder: TFolderDialog
-    Title = 'Wybierz folder'
+    Title = 'Select folder'
     BrowsType = btNone
     SpecialFolder = sfNone
     Left = 104

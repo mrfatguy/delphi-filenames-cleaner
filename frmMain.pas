@@ -203,7 +203,7 @@ begin
         end
         else aName := Copy(aName, 2, Length(aName) - 2);
 
-        //Odstêpy miêdzy wyrazami...
+        //Words separation...
         case cbWordSpace.ItemIndex of
                 0: aName := StringReplace(aName, ' ', '', [rfReplaceAll, rfIgnoreCase]);
                 1:
@@ -238,12 +238,12 @@ begin
                 6: aName := StringReplace(aName, eSeparator.Text, ' ', [rfReplaceAll, rfIgnoreCase]);
         end;
 
-        //Znaki przestankowe
+        //Interpunction characters
         if chbBreakSigns.Checked then for a:=1 to Length(aName) do if aName[a]='.' then aName:=Copy(aName,1,a-1)+Copy(aName,a+1,Length(aName));
         if chbBreakSigns.Checked then for a:=1 to Length(aName) do if aName[a]=',' then aName:=Copy(aName,1,a-1)+Copy(aName,a+1,Length(aName));
         if chbBreakSigns.Checked then for a:=1 to Length(aName) do if aName[a]='''' then aName:=Copy(aName,1,a-1)+Copy(aName,a+1,Length(aName));
 
-        //Polskie litery
+        //Polish letters
         if chbPolishLetters.Checked then for a:=1 to Length(aName) do
         begin
                 if aName[a]='ê' then aName[a]:=Char('e');
@@ -268,7 +268,7 @@ begin
 
         if chbUppercaseAlso.Checked then ReplaceFlags := [rfReplaceAll] else ReplaceFlags := [rfReplaceAll, rfIgnoreCase];
 
-        //B³êdy ortograficzne
+        //Spelling mistakes
         aName := StringReplace(aName, ' ( ', ' (', [rfReplaceAll]);
         aName := StringReplace(aName, '( ', ' (', [rfReplaceAll]);
         aName := StringReplace(aName, ' ) ', ') ', [rfReplaceAll]);
@@ -488,9 +488,9 @@ begin
         ListView.Items.Clear;
 
         for a := 1 to ListView.Columns.Count do ListView.Columns[a - 1].Width := iColumnSize[a - 1];
-        ListView.Columns[0].Caption := 'Obecna nazwa';
-        ListView.Columns[1].Caption := 'Nazwa po zmianie';
-        ListView.Columns[2].Caption := 'Rozmiar pliku';
+        ListView.Columns[0].Caption := 'Current name';
+        ListView.Columns[1].Caption := 'Name after change';
+        ListView.Columns[2].Caption := 'File size';
 
         Attr := faReadOnly + faHidden + faSysFile + faArchive;
         if chbAlsoDirs.Checked then Attr := Attr + faDirectory;
@@ -645,20 +645,20 @@ begin
         Screen.Cursor := crHourglass;
         
         cDirectory := '';
-        pnlPathVal.Caption := ' Mój komputer';
+        pnlPathVal.Caption := ' My computer';
         ListView.Checkboxes := False;
 
         ListView.Columns[0].Width := 142;
         ListView.Columns[1].Width := 257;
         ListView.Columns[2].Width := 110;
-        ListView.Columns[0].Caption := 'Dysk lub napêd fizyczny';
-        ListView.Columns[1].Caption := 'Typ i wolna przestrzeñ';
-        ListView.Columns[2].Caption := 'Rozmiar ca³kowity';
+        ListView.Columns[0].Caption := 'Disk or physical drive';
+        ListView.Columns[1].Caption := 'Type and space left';
+        ListView.Columns[2].Caption := 'Total capacity';
 
         if chbShowPathInTitle.Checked then
         begin
                 Caption := 'FaFNC - Files and Folders Names Cleaner 1.00 - Mój komputer';
-                Application.Title := 'Mój komputer - FaFNC 1.00';
+                Application.Title := 'My computer - FaFNC 1.00';
         end
         else
         begin
@@ -679,11 +679,11 @@ begin
                         lst.Caption := UpperCase(cDrive) + ':\ [' + GetVolumeLabel(cDrive) + ']';
 
                         case iDrive of
-                                DRIVE_REMOVABLE: lst.SubItems.Add('Dysk wymienny');
-                                DRIVE_FIXED: lst.SubItems.Add('Dysk lokalny');
-                                DRIVE_REMOTE: lst.SubItems.Add('Dysk sieciowy');
-                                DRIVE_CDROM: lst.SubItems.Add('Dysk CD lub DVD');
-                                DRIVE_RAMDISK: lst.SubItems.Add('Dysk pamiêciowy');
+                                DRIVE_REMOVABLE: lst.SubItems.Add('Removable drive');
+                                DRIVE_FIXED: lst.SubItems.Add('Fixed drive');
+                                DRIVE_REMOTE: lst.SubItems.Add('Network drive');
+                                DRIVE_CDROM: lst.SubItems.Add('CD or DVD drive');
+                                DRIVE_RAMDISK: lst.SubItems.Add('RAM disk');
                         end;
                         lst.SubItems[0] := lst.SubItems[0] + ' [' + GetVolumeSize(cDrive, False) + ']';
 
@@ -743,11 +743,11 @@ begin
                 if (iDrive <> 0) and (iDrive <> 1) then
                 begin
                         case iDrive of
-                                DRIVE_REMOVABLE: sDrive := 'Dysk wymienny ';
-                                DRIVE_FIXED: sDrive := 'Dysk lokalny ';
-                                DRIVE_REMOTE: sDrive := 'Dysk sieciowy ';
-                                DRIVE_CDROM: sDrive := 'Dysk CD lub DVD ';
-                                DRIVE_RAMDISK: sDrive := 'Dysk pamiêciowy ';
+                                DRIVE_REMOVABLE: sDrive('Removable drive');
+                                DRIVE_FIXED: sDrive('Fixed drive');
+                                DRIVE_REMOTE: sDrive('Network drive');
+                                DRIVE_CDROM: sDrive('CD or DVD drive');
+                                DRIVE_RAMDISK: sDrive('RAM disk');
                         end;
 
                         mnu := TMenuItem.Create(pmList);
@@ -764,7 +764,7 @@ begin
         pmList.Items.Add(mnu);
 
         mnu := TMenuItem.Create(pmList);
-        mnu.Caption := 'Wyœwietl wszystkie dyski i napêdy';
+        mnu.Caption := 'Display all drives and disks';
         mnu.Tag := 33;
         mnu.OnClick := DiskMenuClickHandler;
         pmList.Items.Add(mnu);
@@ -820,19 +820,19 @@ begin
         end;
 
         sSelected := IncludeTrailingBackslash(cDirectory) + sSelected;
-        if chbConfirmations.Checked then if Application.MessageBox(PChar('Uruchomiæ plik:'+chr(13)+sSelected+chr(13)+chr(13)+'Uruchomiony zostanie program skojarzony w systemie z typem wybranego pliku.'),'Uruchomienie pliku...',MB_YESNO+MB_ICONQUESTION+MB_DEFBUTTON2) = ID_NO then exit;
+        if chbConfirmations.Checked then if Application.MessageBox(PChar('Execute following file:'+chr(13)+sSelected+chr(13)+chr(13)+'A program selected to open this type of files will be run'),'Execute file...',MB_YESNO+MB_ICONQUESTION+MB_DEFBUTTON2) = ID_NO then exit;
         ShellExecute(Handle, 'open', PChar(sSelected), '', '', SW_SHOW);
 end;
 
 procedure TMainForm.lblWebClick(Sender: TObject);
 begin
-        ShellExecute(Handle, 'open', 'http://www.trejderowski.pl/', '', '', SW_SHOW);
+        ShellExecute(Handle, 'open', 'http://www.gaman.pl/', '', '', SW_SHOW);
 end;
 
 procedure TMainForm.chbConfirmationsClick(Sender: TObject);
 begin
         if IsLoading then exit;
-        if not chbConfirmations.Checked then if Application.MessageBox('Gdy pole to jest odznaczone, przypadkowe naciœniêcie klawisza Delete spowoduje usuniêcie pliku bez potwierdzenia!'+chr(13)+'(Uwaga! Pliki s¹ usuwane BEZ wykorzystania Kosza - jest to operacja NIEODWRACALNA!)'+chr(13)+''+chr(13)+'Czy na pewno wy³¹czyæ ostrze¿enia?','Ostrze¿enie!',MB_YESNO+MB_ICONWARNING+MB_DEFBUTTON2) = ID_NO then chbConfirmations.Checked := True;
+        if not chbConfirmations.Checked then if Application.MessageBox('When this checkbox is not check, any accidental press of DEL button, when on list will delete file permanently!'+chr(13)+'(files are deleted WITHOUT using system bin -- this operation CANNOT BE UNDONE!)'+chr(13)+''+chr(13)+'Are you sure, that you want to disable warnings?','Warnings!',MB_YESNO+MB_ICONWARNING+MB_DEFBUTTON2) = ID_NO then chbConfirmations.Checked := True;
 end;
 
 procedure TMainForm.ListViewKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -844,12 +844,12 @@ begin
         if (Key = VK_F2) and (ListView.Selected.ImageIndex < 2) then
         begin
                 sSource := ListView.Selected.Caption;
-                sDest := InputBox('Zmiana nazwy', 'Podaj now¹ nazwê dla wskazanego pliku:', sSource);
+                sDest := InputBox('Rename', 'Enter new name for selected file:', sSource);
 
                 if sDest = sSource then exit;
 
                 if not RenameFile(IncludeTrailingBackslash(cDirectory) + sSource, cDirectory + '\' + sDest) then
-                        Application.MessageBox('Zmiana nazwy pliku nie powiod³a siê!','B³¹d...',MB_OK+MB_ICONWARNING+MB_DEFBUTTON1)
+                        Application.MessageBox('File rename failed!','Error...',MB_OK+MB_ICONWARNING+MB_DEFBUTTON1)
                 else
                         ReadDir(cDirectory, True);
         end;
@@ -858,14 +858,14 @@ begin
         begin
                 sFile := IncludeTrailingBackslash(cDirectory) + ListView.Selected.Caption;
 
-                if chbconfirmations.Checked then if Application.MessageBox(PChar('Uwaga! Poni¿szy plik zostanie TRWALE usuniêty!' + chr(13) + chr(13) + sFile + chr(13) + chr(13) + 'Czy na pewno usun¹æ ten plik?' + chr(13) + '(Uwaga! Pliki s¹ usuwane BEZ wykorzystania Kosza - jest to operacja NIEODWRACALNA!)'),'Usuwanie pliku...',MB_YESNO+MB_ICONQUESTION+MB_DEFBUTTON2) = ID_NO then exit;
+                if chbconfirmations.Checked then if Application.MessageBox(PChar('Following file will be PERMANENTLY deleted:' + chr(13) + chr(13) + sFile + chr(13) + chr(13) + 'Are you sure, you want to proceed?' + chr(13) + '(files are deleted WITHOUT using system bin -- this operation CANNOT BE UNDONE!)'),'Deleting a file..',MB_YESNO+MB_ICONQUESTION+MB_DEFBUTTON2) = ID_NO then exit;
 
                 if DeleteFile(sFile) then
                 begin
                         ListView.Selected.Delete;
                         ReadDir(cDirectory, True);
                 end
-                else Application.MessageBox('Usuwanie pliku nie powiod³o siê!','B³¹d...',MB_OK+MB_ICONWARNING+MB_DEFBUTTON1)
+                else Application.MessageBox('File deletion failed!','Error...',MB_OK+MB_ICONWARNING+MB_DEFBUTTON1)
         end;
 
         if Key = VK_RETURN then ListViewDblClick(self);
@@ -896,7 +896,7 @@ begin
                 else
                 begin
                         Caption := 'FaFNC - Files and Folders Names Cleaner 1.00 - Mój komputer';
-                        Application.Title := 'Mój komputer - FaFNC 1.00';
+                        Application.Title := 'My computer - FaFNC 1.00';
                 end;
         end
         else
@@ -1001,7 +1001,7 @@ begin
 
         if AllUnchecked then
         begin
-                Application.MessageBox('Nie wybrano ¿adnej pozycji na liœcie.','Informacja...',MB_OK+MB_ICONINFORMATION+MB_DEFBUTTON1);
+                Application.MessageBox('No items selected on list.','Information...',MB_OK+MB_ICONINFORMATION+MB_DEFBUTTON1);
                 exit;
         end;
 
@@ -1010,7 +1010,7 @@ begin
 
         if AllAlreadyReady then
         begin
-                Application.MessageBox('Wszystkie zaznaczone pozycje nie podlegaj¹ zmianie.','Informacja...',MB_OK+MB_ICONINFORMATION+MB_DEFBUTTON1);
+                Application.MessageBox('All selected items are already renamed.','Information...',MB_OK+MB_ICONINFORMATION+MB_DEFBUTTON1);
                 exit;
         end;
 
@@ -1023,7 +1023,6 @@ begin
                         begin
                                 sOldFile := IncludeTrailingBackslash(cDirectory) + ListView.Items[a].Caption;
                                 sNewFile := IncludeTrailingBackslash(cDirectory) + ListView.Items[a].SubItems[0];
-                                //ShowMessage('File:' + #10#13 + sOldFile + #10#13#10#13 + 'to:' + #10#13 + sNewFile);
                                 if not RenameFile(sOldFile, sNewFile) then AllDone := False;
                         end;
 
@@ -1031,7 +1030,6 @@ begin
                         begin
                                 sOldFile := IncludeTrailingBackslash(cDirectory) + Copy(ListView.Items[a].Caption, 2, Length(ListView.Items[a].Caption) - 2);
                                 sNewFile := IncludeTrailingBackslash(cDirectory) + Copy(ListView.Items[a].SubItems[0], 2, Length(ListView.Items[a].SubItems[0]) - 2);
-                                //ShowMessage('Dir:' + #10#13 + sOldFile + #10#13#10#13 + 'to:' + #10#13 + sNewFile);
                                 if not MoveFile(PChar(sOldFile), PChar(sNewFile))then AllDone := False;
                         end;
                 end;
@@ -1039,7 +1037,7 @@ begin
 
         if not AllDone then
         begin
-                Application.MessageBox('Wyst¹pi³ b³¹d przy zmianie nazwy jednego lub wiêcej plików albo folderów!' + #10#13 + 'Byæ mo¿e posiadaj¹ one atrybut tylko-do-odczytu? Zmieñ go i spróbuj ponownie.','Informacja...',MB_OK+MB_ICONEXCLAMATION+MB_DEFBUTTON1);
+                Application.MessageBox('An error occurred when trying to rename one or more files or folders!' + #10#13 + 'If these files or folders have read-only attribute set, then remove it and repeat this operation','Information...',MB_OK+MB_ICONEXCLAMATION+MB_DEFBUTTON1);
                 exit;
         end;
 
@@ -1111,7 +1109,7 @@ begin
 
         sSelected := IncludeTrailingBackslash(cDirectory) + ListView.Selected.Caption;
 
-        if chbConfirmations.Checked then if Application.MessageBox(PChar('Uruchomiæ plik:'+chr(13)+sSelected+chr(13)+chr(13)+'Uruchomiony zostanie program skojarzony w systemie z typem wybranego pliku.'),'Uruchomienie pliku...',MB_YESNO+MB_ICONQUESTION+MB_DEFBUTTON2) = ID_NO then exit;
+        if chbConfirmations.Checked then if Application.MessageBox(PChar('Execute following file:'+chr(13)+sSelected+chr(13)+chr(13)+'A program selected to open this type of files will be run'),'Execute file...',MB_YESNO+MB_ICONQUESTION+MB_DEFBUTTON2) = ID_NO then exit;
         ShellExecute(Handle, 'open', PChar(sSelected), '', '', SW_SHOW);
 end;
 
